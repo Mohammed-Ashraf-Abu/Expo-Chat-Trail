@@ -7,38 +7,40 @@ export default function RootLayout() {
   return (
     <>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
         <Stack.Screen
           name="index"
           options={{
-            title: "Home",
+            title: "Chat App",
             headerShown: true,
             headerStyle: {
-              backgroundColor: "#007AFF",
+              backgroundColor: "cyan",
             },
-            headerTintColor: "#fff",
+            headerTintColor: "black",
           }}
         />
         <Stack.Screen
-          name="about"
+          name="chatBot"
           options={{
-            title: "About",
+            title: "Chat Bot",
+            headerBackTitle: "Back",
             headerShown: true,
             headerStyle: {
-              backgroundColor: "#007AFF",
+              backgroundColor: "cyan",
             },
-            headerTintColor: "#fff",
+            headerTintColor: "black",
           }}
         />
         <Stack.Screen
-          name="settings"
+          name="chatList"
           options={{
-            title: "Settings",
+            title: "Chat List",
+            headerBackTitle: "Back",
             headerShown: true,
             headerStyle: {
-              backgroundColor: "#007AFF",
+              backgroundColor: "cyan",
             },
-            headerTintColor: "#fff",
+            headerTintColor: "black",
           }}
         />
       </Stack>

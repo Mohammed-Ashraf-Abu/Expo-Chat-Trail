@@ -1,41 +1,42 @@
+import { Card } from "@/components/card";
 import { router } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
-  const navigateToAbout = () => {
+  const navigateToChatBot = () => {
     // Stack-based navigation - direct paths
-    router.push("/about");
+    router.push("/chatBot");
   };
 
-  const navigateToSettings = () => {
+  const navigateToChatList = () => {
     // Stack-based navigation - direct paths
-    router.push("/settings");
+    router.push("/chatList");
   };
-
+  const list = [
+    {
+      title: "ChatBot",
+      description: "Wellcome to ChatBot",
+      image: require("../assets/images/chatBot.png"),
+      onPress: navigateToChatBot,
+    },
+    {
+      title: "Chat List",
+      description: "Wellcome to Chats",
+      image: require("../assets/images/chatBot.png"),
+      onPress: navigateToChatList,
+    },
+  ];
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Welcome to ExpoChat!</Text>
-        <Text style={styles.subtitle}>Your simple chat application</Text>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={navigateToAbout}>
-          <Text style={styles.buttonText}>Go to About</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={navigateToSettings}>
-          <Text style={styles.buttonText}>Go to Settings</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.infoContainer}>
-        <Text style={styles.infoTitle}>Navigation</Text>
-        <Text style={styles.infoText}>
-          You can navigate between screens using the buttons above. The header
-          navigation is also available.
+        <Text style={styles.title}>Wellcome to app </Text>
+        <Text style={styles.subtitle}>
+          Your simple poc to learn expo and chat SDK
         </Text>
       </View>
+      {list.map((item) => (
+        <Card key={item.title} {...item} onPress={item.onPress} />
+      ))}
     </View>
   );
 }
@@ -60,32 +61,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 8,
     opacity: 0.7,
-  },
-  buttonContainer: {
-    gap: 16,
-    marginBottom: 40,
-  },
-  button: {
-    backgroundColor: "#007AFF",
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  infoContainer: {
-    gap: 8,
-  },
-  infoTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 8,
-  },
-  infoText: {
-    fontSize: 14,
-    lineHeight: 20,
   },
 });
