@@ -61,7 +61,7 @@ export const ChatBot = () => {
         {
           headers: {
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
             "HTTP-Referer": "https://mychatbot.com",
             "Content-Type": "application/json",
           },

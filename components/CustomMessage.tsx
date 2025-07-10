@@ -1,5 +1,12 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { IMessage, MessageProps } from "react-native-gifted-chat";
 
 interface CustomMessageProps
@@ -11,6 +18,8 @@ export const CustomMessage: React.FC<CustomMessageProps> = ({
   currentMessage,
   position,
 }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   if (!currentMessage) return null;
 
   const isUser = position === "right";
@@ -72,11 +81,13 @@ export const CustomMessage: React.FC<CustomMessageProps> = ({
         </View>
 
         {currentMessage.image && typeof currentMessage.image === "string" && (
-          <Image
-            source={{ uri: currentMessage.image }}
-            style={styles.messageImage}
-            resizeMode="cover"
-          />
+          <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+            <Image
+              source={{ uri: currentMessage.image }}
+              style={styles.messageImage}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
         )}
 
         {currentMessage.createdAt && (
@@ -90,6 +101,27 @@ export const CustomMessage: React.FC<CustomMessageProps> = ({
           </Text>
         )}
       </View>
+
+      <Modal
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <Image
+            source={{ uri: currentMessage.image }}
+            style={styles.modalImage}
+          />
+          <TouchableOpacity
+            onPress={() => setIsModalVisible(false)}
+            style={{ backgroundColor: "cyan", padding: 10, borderRadius: 10 }}
+          >
+            <Text style={{ color: "black", fontSize: 16, fontWeight: "bold" }}>
+              Close
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -189,5 +221,16 @@ const styles = StyleSheet.create({
   botTimestamp: {
     textAlign: "left",
     color: "#666",
+  },
+  modalImage: {
+    width: "80%",
+    height: "80%",
+    resizeMode: "contain",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightgrey",
   },
 });
